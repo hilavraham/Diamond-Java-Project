@@ -9,17 +9,29 @@ public class Point3D {
 	final Coordinate x;
 	final Coordinate y;
 	final Coordinate z;
+	
+	 //static Point3D for point (0,0,0)
 	public final static Point3D ZERO = new Point3D(0, 0, 0);
 	
-	
-	
-	public Point3D(double x, double y, double z) {
-		super();
-		this.x = new Coordinate(x);
-		this.y = new Coordinate(y);
-		this.z = new Coordinate(z);
-	}
 
+    /**
+     * primary constructor for Point3D
+     * @param _x coordinate value for x 
+     * @param _y coordinate value for y 
+     * @param _z coordinate value for z 
+     */
+	public Point3D(double _x, double _y, double _z) {
+		super();
+		this.x = new Coordinate(_x);
+		this.y = new Coordinate(_y);
+		this.z = new Coordinate(_z);
+	}
+	
+	   /**
+     * Subtraction between points
+     * @param point3d A point that represents the beginning of the vector 
+     * and its copy to the beginning of the axes 
+     */
 	public Vector subtract(Point3D point3d) {
 		double _x =x.coord- point3d.x.coord;
 		double _y =y.coord- point3d.y.coord;
@@ -27,7 +39,11 @@ public class Point3D {
 		
 		return new Vector(_x, _y,_z);
 	}
-
+	
+	   /**
+     * Add between points
+     * @param vector Add vector
+     */
 	public Point3D add(Vector vector) {
 		double _x =x.coord+ vector.head.x.coord;
 		double _y =y.coord+ vector.head.y.coord;
@@ -36,6 +52,10 @@ public class Point3D {
 		return new Point3D(_x, _y,_z);
 	}
 	
+	   /**
+  * The distance between the vectors (power of 2) - an algebraic form of calculation
+  * @param point3d A point that represents the beginning of the vector
+  */
 	public double distanceSquared(Point3D other) {
 		double xx = (other.x.coord-x.coord)*(other.x.coord-x.coord);
 		double yy = (other.y.coord-y.coord)*(other.y.coord-y.coord);
@@ -44,13 +64,21 @@ public class Point3D {
 		return (xx+yy+zz);
 	}
 
+	   /**
+* The distance between the vectors - an algebraic form of calculation
+* @param point3d A point that represents the beginning of the vector
+*/
 	public double distance(Point3D other) {
 		
 		return Math.sqrt(distanceSquared(other));
 	}
 
 
-
+	   /**
+* Comparison of vectors
+* @Override
+* @param obj Vector for comparison 
+*/
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)

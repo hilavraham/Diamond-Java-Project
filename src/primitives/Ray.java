@@ -1,5 +1,9 @@
 package primitives;
+/**
+ * Class Ray Representation of a beam by point and direction vector
+ * @author Hila avraham
 
+ */
 public class Ray {
 	final Point3D p0;	
 	final Vector dir;
@@ -12,10 +16,12 @@ public class Ray {
 		return dir;
 	}
 	
-	public Ray(Point3D p0, Vector dir) {
-		super();
-		this.p0 = p0;
-		this.dir = dir.normalized();
+	   /**
+     * primary constructor for ray
+     */
+	public Ray(Point3D _p0, Vector _dir) {
+		this.p0 = _p0;
+		this.dir = _dir.normalized();
 	}
 
 
