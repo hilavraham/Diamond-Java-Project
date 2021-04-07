@@ -18,9 +18,41 @@ public class Tube implements Geometry {
         radius = _radius;
     }
 
-    @Override
-    public Vector getNormal(Point3D p) {
-      
-            return null;
-        }
+    public Ray getAxysRay() {
+		return axysRay;
+	}
+
+	public double getRadius() {
+		return radius;
+	}
+
+	@Override
+	public String toString() {
+		return "Tube [axysRay=" + axysRay + ", radius=" + radius + "]";
+	}
+
+	 @Override
+	    public Vector getNormal(Point3D p) {
+	    
+	        Point3D P0 = axysRay.getP0();
+	        Vector v = axysRay.getDir();
+
+	        Vector P0_P = p.subtract(P0);
+
+	        double t = alignZero(v.dotProduct(P0_P));
+
+	        if (isZero(t)) {
+	            return P0_P.normalize();
+	        }
+
+	        Point3D o = P0.add(v.scale(t));
+
+	        if (p.equals(o)) {
+	            throw new IllegalArgumentException("point cannot be on the tube axis");
+	        }
+
+	        Vector n = p.subtract(o).normalize();
+
+	        return n;
+	    }
 }

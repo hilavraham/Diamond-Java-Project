@@ -1,4 +1,6 @@
 package primitives;
+
+import static primitives.Util.isZero;
 /**
  * Class Ray Representation of a beam by point and direction vector
  * @author Hila avraham
@@ -16,6 +18,13 @@ public class Ray {
 		return dir;
 	}
 	
+	 public Point3D getPoint(double delta ){
+	        if (isZero(delta)){
+	            return  p0;
+	        }
+	        return p0.add(dir.scale(delta));
+	    }
+	
 	   /**
      * primary constructor for ray
      */
@@ -23,6 +32,8 @@ public class Ray {
 		this.p0 = _p0;
 		this.dir = _dir.normalized();
 	}
+	
+
 
 
 
