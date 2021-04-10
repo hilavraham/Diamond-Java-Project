@@ -2,12 +2,19 @@ package geometries;
 
 import primitives.Point3D;
 import primitives.Vector;
-
+/**
+ *Plane class represents Plane in 3D Cartesian coordinate system
+ * by 3D Cartesian coordinate and normal
+ * @author hila
+ */
 public class Plane  {
 
 	  final Point3D p0;
 	  final Vector normal;
 	  
+	  /**
+	   * primary constructor 
+	   * */
 	  public Plane(Point3D _p0, Vector _normal) {
 	        p0 = _p0;
 	        normal = _normal.normalized();

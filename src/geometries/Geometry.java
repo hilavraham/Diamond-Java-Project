@@ -5,6 +5,9 @@ import primitives.Vector;
 
 public interface Geometry {
 
-	Vector getNormal(Point3D point);
+    /*
+    * @return the normal to the geometry
+    */
+   Vector getNormal(Point3D point);
 
 }

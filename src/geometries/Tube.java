@@ -9,10 +9,21 @@ import java.util.List;
 import static primitives.Util.alignZero;
 import static primitives.Util.isZero;
 
+/**
+ *Triangle class represents Triangle in 3D Cartesian coordinate system
+ * by ray and radius
+ * @author hila
+ */
+
 public class Tube implements Geometry {
     final Ray axysRay;
     final double radius;
 
+
+	  /**
+	   * primary constructor 
+	   * */
+    
     public Tube(Ray _axysRay, double _radius) {
         axysRay = _axysRay;
         radius = _radius;
@@ -31,6 +42,9 @@ public class Tube implements Geometry {
 		return "Tube [axysRay=" + axysRay + ", radius=" + radius + "]";
 	}
 
+    /**
+     *  Calculation of the normal
+     * */
 	 @Override
 	    public Vector getNormal(Point3D p) {
 	    
