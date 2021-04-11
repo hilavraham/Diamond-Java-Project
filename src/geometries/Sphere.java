@@ -44,4 +44,10 @@ public class Sphere implements Geometry {
         Vector p0 = p.subtract(center);
         return p0.normalize();
     }
+
+	@Override
+	public List<Point3D> findIntersections(Ray ray) {
+		// TODO Auto-generated method stub
+		return null;
+	}
     }

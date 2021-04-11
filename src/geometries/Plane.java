@@ -1,13 +1,16 @@
 package geometries;
 
+import java.util.List;
+
 import primitives.Point3D;
+import primitives.Ray;
 import primitives.Vector;
 /**
  *Plane class represents Plane in 3D Cartesian coordinate system
  * by 3D Cartesian coordinate and normal
  * @author hila
  */
-public class Plane  {
+public class Plane implements Geometry {
 
 	  final Point3D p0;
 	  final Vector normal;
@@ -54,7 +57,14 @@ public class Plane  {
 		  public Vector getNormal(Point3D point) {
 		        return normal;
 		    }
+		  
+		  @Override
+			public List<Point3D> findIntersections(Ray ray) {
+				// TODO Auto-generated method stub
+				return null;
+			}
 	}
+
 
 
 
