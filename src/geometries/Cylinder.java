@@ -7,6 +7,7 @@ import primitives.Vector;
 import static primitives.Util.alignZero;
 import static primitives.Util.isZero;
 
+import java.util.ArrayList;
 import java.util.List;
 /**
  *Cylinder class represents Cylinder in 3D Cartesian coordinate system
@@ -60,7 +61,7 @@ public String toString() {
     }
 
     @Override
-	public List<Point3D> findIntersections(Ray ray) {
+	public ArrayList<Point3D> findIntersections(Ray ray) {
 		// TODO Auto-generated method stub
 		return null;
 	}
