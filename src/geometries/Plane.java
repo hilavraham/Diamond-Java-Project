@@ -1,6 +1,10 @@
 package geometries;
 
-import java.util.List;
+import java.util.ArrayList;
+
+
+import static primitives.Util.alignZero;
+import static primitives.Util.isZero;
 
 import primitives.Point3D;
 import primitives.Ray;
@@ -59,10 +63,46 @@ public class Plane implements Geometry {
 		    }
 		  
 		  @Override
-			public List<Point3D> findIntersections(Ray ray) {
-				// TODO Auto-generated method stub
-				return null;
-			}
+			public ArrayList<Point3D> findIntersections(Ray ray) {
+			  ArrayList<Point3D> intersections = new ArrayList<Point3D>();
+			  Point3D P0ray = ray.getP0();
+		        Vector v = ray.getDir();
+
+		        Vector n = normal;
+
+		        if(p0.equals(P0ray)){
+		            return  null;
+		        }
+
+		        Vector P0_Q0 =p0.subtract(P0ray);
+
+		       //numerator
+		        double nP0Q0  = alignZero(n.dotProduct(P0_Q0));
+
+		        //
+		        if (isZero(nP0Q0 )){
+		            return null;
+		        }
+
+		        //denominator
+		        double nv = alignZero(n.dotProduct(v));
+
+		        // ray is lying in the plane axis
+		        if(isZero(nv)){
+		            return null;
+		        }
+
+		        double  t = alignZero(nP0Q0  / nv);
+
+		        if (t <=0){
+		            return  null;
+		        }
+
+		        Point3D point = ray.getPoint(t);
+		        intersections.add(point);
+		        return intersections;
+		    }
+
 	}
 
 
