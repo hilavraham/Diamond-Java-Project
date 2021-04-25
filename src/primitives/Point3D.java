@@ -26,6 +26,34 @@ public class Point3D {
 		this.y = new Coordinate(_y);
 		this.z = new Coordinate(_z);
 	}
+
+	public Point3D(Point3D p1) {
+		this.x = new Coordinate(p1.x.coord);
+		this.y = new Coordinate(p1.y.coord);
+		this.z = new Coordinate(p1.z.coord);
+	}
+
+	/**
+	 * @return the x
+	 */
+	public Coordinate getX() {
+		return x;
+	}
+
+	/**
+	 * @return the y
+	 */
+	public Coordinate getY() {
+		return y;
+	}
+
+	/**
+	 * @return the z
+	 */
+	public Coordinate getZ() {
+		return z;
+	}
+
 	
 	   /**
      * Subtraction between points

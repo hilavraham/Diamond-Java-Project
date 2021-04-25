@@ -4,6 +4,7 @@ import primitives.Point3D;
 import primitives.Ray;
 import primitives.Vector;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static primitives.Util.alignZero;
@@ -45,9 +46,55 @@ public class Sphere implements Geometry {
         return p0.normalize();
     }
 
-	@Override
-	public List<Point3D> findIntersections(Ray ray) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    @Override
+    public ArrayList<Point3D> findIntersections(Ray ray) {
+    	ArrayList<Point3D> intersections = new ArrayList<Point3D>();
+        Point3D P0 = ray.getP0();
+        Vector v = ray.getDir();
+
+        if (P0.equals(center)) {
+        	intersections.add(center.add(v.scale(radius)));
+            return intersections;
+        }
+
+        Vector U = center.subtract(P0);
+
+        double tm = alignZero(v.dotProduct(U));
+        double d = alignZero(Math.sqrt(U.lengthSquared() - tm * tm));
+
+        // no intersections : the ray direction is above the sphere
+        if (d >= radius) {
+            return null;
+        }
+
+        double th = alignZero(Math.sqrt(radius * radius - d * d));
+        double t1 = alignZero(tm - th);
+        double t2 = alignZero(tm + th);
+
+        if (t1 > 0 && t2 > 0) {
+//            Point3D P1 = P0.add(v.scale(t1));
+//            Point3D P2 = P0.add(v.scale(t2));
+            Point3D P1 =ray.getPoint(t1);
+            Point3D P2 =ray.getPoint(t2);
+            intersections.add(P1);
+            intersections.add(P2);
+            return intersections;
+        }
+        if (t1 > 0) {
+//            Point3D P1 = P0.add(v.scale(t1));
+            Point3D P1 =ray.getPoint(t1);
+            intersections.add(P1);
+
+            return intersections;
+        }
+        if (t2 > 0) {
+//            Point3D P2 = P0.add(v.scale(t2));
+            Point3D P2 =ray.getPoint(t2);
+
+            intersections.add(P2);
+            return intersections;
+        }
+        return null;
     }
+}
+   

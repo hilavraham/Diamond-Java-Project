@@ -30,6 +30,11 @@ public class Vector {
 	public Vector(double _x, double _y, double _z) {
 		this(new Point3D(_x, _y, _z)); 
 	}
+	
+	public Vector(Vector v) {
+		super();
+		this.head = new Point3D(v.head);
+	}
 
 
 
