@@ -178,4 +178,37 @@ public class Vector {
 	    public String toString() {
 	        return "{" + head + '}';
 	    }
+	 
+	 /**
+	     * @param axis axis of rotation
+	     * @param theta angle of rotation
+	     */
+	    public void rotateVector(Vector axis, double theta) {
+	        double x = this.head.getX().coord;
+	        double y = this.head.getY().coord;
+	        double z = this.head.getZ().coord;
+
+	        double u = axis.head.getX().coord;
+	        double v = axis.head.getY().coord;
+	        double w = axis.head.getZ().coord;
+
+	        double v1 = u * x + v * y + w * z;
+
+	        double thetaRad = Math.toRadians(theta);
+
+	        double xPrime = u * v1 * (1d - Math.cos(thetaRad))
+	                + x * Math.cos(thetaRad)
+	                + (-w * y + v * z) * Math.sin(thetaRad);
+
+	        double yPrime = v * v1 * (1d - Math.cos(thetaRad))
+	                + y * Math.cos(thetaRad)
+	                + (w * x - u * z) * Math.sin(thetaRad);
+
+	        double zPrime = w * v1 * (1d - Math.cos(thetaRad))
+	                + z * Math.cos(thetaRad)
+	                + (-v * x + u * y) * Math.sin(thetaRad);
+
+	        this.head = new Point3D(xPrime, yPrime, zPrime);
+	    }
+
 }

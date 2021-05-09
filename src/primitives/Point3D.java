@@ -32,6 +32,7 @@ public class Point3D {
 		this.y = new Coordinate(p1.y.coord);
 		this.z = new Coordinate(p1.z.coord);
 	}
+	
 
 	/**
 	 * @return the x

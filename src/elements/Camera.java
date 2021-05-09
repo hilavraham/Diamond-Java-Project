@@ -113,5 +113,35 @@ public class Camera {
         return new Ray(p0, Vij);
 
     }
+    /**
+    
+     * @param up    delta for _vUp vector
+     * @param right delta for _vRight vector
+     * @param to    delta for _vTo vector
+     * @return
+     */
+    public Camera moveCamera(double up, double right, double to) {
+        if (up == 0 && right == 0 && to == 0) return this;
+        if (up != 0) this.p0.add(vUp.scale(up));
+        if (right != 0) this.p0.add(vRight.scale(right));
+        if (to != 0) this.p0.add(vTo.scale(to));
+        return this;
+    }
+
+    /**
+     * 
+     *
+     * @param axis  turning axis
+     * @param theta angle to turn the camera
+     * @return
+     */
+    public Camera turnCamera(Vector axis, double theta) {
+        if (theta == 0) return this;
+        this.vUp.rotateVector(axis, theta);
+        this.vRight.rotateVector(axis, theta);
+        this.vTo.rotateVector(axis, theta);
+        return this;
+    }
+
 
 }
