@@ -1,19 +1,35 @@
+/**
+ * 
+ */
 package elements;
 
 import primitives.Color;
 
+/**
+ * @author hilaa
+ *
+ */
 public class AmbientLight {
-public Color intensity; 
+    /**
+     * intensity of ambient light color
+     */
+    final private Color intensity;
 
-	public AmbientLight(Color color,double ka)
-	{
-		intensity=color.scale(ka);
-	}
+    /**
+     * Constructor
+     * @param Ia intensity color
+     * @param Ka constant for intensity
+     */
+    public AmbientLight(Color Ia, double Ka) {
+        intensity = Ia.scale(Ka);
+    }
 
-	public Color get_intensity() 
-	{
-		return intensity;
-	}
-	
+    /**
+     * get intensity color
+     * @return intensity
+     */
+    public Color getIntensity() {
+        return intensity;
+    }
 
 }

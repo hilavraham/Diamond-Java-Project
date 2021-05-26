@@ -1,6 +1,8 @@
 package primitives;
 
 import static primitives.Util.isZero;
+
+import java.util.List;
 /**
  * Class Ray Representation of a beam by point and direction vector
  * @author Hila avraham
@@ -34,6 +36,30 @@ public class Ray {
 	}
 	
 
+    /**
+     * find the closest Point to Ray origin
+     * @param pointsList intersections point List
+     * @return closest point
+     */
+    public Point3D findClosestPoint(List<Point3D> pointsList){
+        Point3D result =null;
+        //The greatest distance (this will change)
+        double closestDistance = Double.MAX_VALUE;
+
+        if(pointsList== null){
+            return null;
+        }
+
+        for (Point3D p: pointsList) {
+            double temp = p.distance(p0);
+            if(temp < closestDistance){
+                closestDistance =temp;
+                result =p;
+            }
+        }
+
+        return  result;
+    }
 
 
 
