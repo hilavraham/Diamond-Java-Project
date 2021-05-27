@@ -14,26 +14,24 @@ import static primitives.Util.isZero;
  * by 3D Cartesian coordinate and radius
  * @author hila
  */
-public class Sphere implements Geometry {
+public class Sphere extends RadialGeometry {
     final Point3D center;
-    final double radius;
+
 
 
 	  /**
 	   * primary constructor 
 	   * */
     public Sphere(Point3D _center, double _radius) {
-        center = _center;
-        radius = _radius;
+        super(_radius);
+    	center = _center;
+
     }
 
     public Point3D getCenter() {
         return center;
     }
 
-    public double getRadius() {
-        return radius;
-    }
     
 
 	/**
@@ -53,7 +51,7 @@ public class Sphere implements Geometry {
         Vector v = ray.getDir();
 
         if (P0.equals(center)) {
-        	intersections.add(center.add(v.scale(radius)));
+        	intersections.add(center.add(v.scale(getRadius())));
             return intersections;
         }
 
@@ -63,11 +61,11 @@ public class Sphere implements Geometry {
         double d = alignZero(Math.sqrt(U.lengthSquared() - tm * tm));
 
         // no intersections : the ray direction is above the sphere
-        if (d >= radius) {
+        if (d >= getRadius()) {
             return null;
         }
 
-        double th = alignZero(Math.sqrt(radius * radius - d * d));
+        double th = alignZero(Math.sqrt(getRadius() * getRadius() - d * d));
         double t1 = alignZero(tm - th);
         double t2 = alignZero(tm + th);
 

@@ -14,7 +14,7 @@ import primitives.Vector;
  * by 3D Cartesian coordinate and normal
  * @author hila
  */
-public class Plane implements Geometry {
+public class Plane extends Geometry {
 
 	  final Point3D p0;
 	  final Vector normal;
