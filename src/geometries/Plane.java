@@ -1,7 +1,7 @@
 package geometries;
 
 import java.util.ArrayList;
-
+import java.util.List;
 
 import static primitives.Util.alignZero;
 import static primitives.Util.isZero;
@@ -61,10 +61,10 @@ public class Plane extends Geometry {
 		  public Vector getNormal(Point3D point) {
 		        return normal;
 		    }
-		  
-		  @Override
-			public ArrayList<Point3D> findIntersections(Ray ray) {
-			  ArrayList<Point3D> intersections = new ArrayList<Point3D>();
+		 
+		@Override
+		public List<GeoPoint> findGeoIntersections(Ray ray) {
+			  ArrayList<GeoPoint> intersections = new ArrayList<GeoPoint>();
 			  Point3D P0ray = ray.getP0();
 		        Vector v = ray.getDir();
 
@@ -99,7 +99,7 @@ public class Plane extends Geometry {
 		        }
 
 		        Point3D point = ray.getPoint(t);
-		        intersections.add(point);
+		        intersections.add(new GeoPoint(this, point));
 		        return intersections;
 		    }
 

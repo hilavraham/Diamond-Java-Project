@@ -45,13 +45,18 @@ public class Circle extends RadialGeometry  {
         return _plane.getNormal(null);
     }
     
-    @Override
-    public List<Point3D> findIntersections(Ray ray) {
-        List<Point3D> intersections = _plane.findIntersections(ray);
-        if (intersections == null) return null;
 
-        double pToEdge = alignZero(_radius - _center.distance(intersections.get(0)));
-        if (pToEdge <=0 ) return null;
+
+	@Override
+	public List<GeoPoint> findGeoIntersections(Ray ray) {
+        List<GeoPoint> intersections = _plane.findGeoIntersections(ray);
+        if (intersections == null)
+        	return null;
+
+        double pToEdge = alignZero(_radius - _center.distance(new Point3D(	intersections.get(0))));
+
+        if (pToEdge <=0 ) 
+        	return null;
         return intersections;
-    }
+	}
 }

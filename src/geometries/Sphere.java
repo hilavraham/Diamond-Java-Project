@@ -44,14 +44,14 @@ public class Sphere extends RadialGeometry {
         return p0.normalize();
     }
 
-    @Override
-    public ArrayList<Point3D> findIntersections(Ray ray) {
-    	ArrayList<Point3D> intersections = new ArrayList<Point3D>();
+	@Override
+	public List<GeoPoint> findGeoIntersections(Ray ray) {
+		ArrayList<GeoPoint> intersections = new ArrayList<GeoPoint>();
         Point3D P0 = ray.getP0();
         Vector v = ray.getDir();
 
         if (P0.equals(center)) {
-        	intersections.add(center.add(v.scale(getRadius())));
+        	intersections.add(new GeoPoint(this,center.add(v.scale(getRadius())) ));
             return intersections;
         }
 
@@ -74,22 +74,21 @@ public class Sphere extends RadialGeometry {
 //            Point3D P2 = P0.add(v.scale(t2));
             Point3D P1 =ray.getPoint(t1);
             Point3D P2 =ray.getPoint(t2);
-            intersections.add(P1);
-            intersections.add(P2);
+            intersections.add(new GeoPoint(this,P1));
+            intersections.add(new GeoPoint(this,P2));
             return intersections;
         }
         if (t1 > 0) {
 //            Point3D P1 = P0.add(v.scale(t1));
             Point3D P1 =ray.getPoint(t1);
-            intersections.add(P1);
+            intersections.add(new GeoPoint(this,P1));
 
             return intersections;
         }
         if (t2 > 0) {
 //            Point3D P2 = P0.add(v.scale(t2));
             Point3D P2 =ray.getPoint(t2);
-
-            intersections.add(P2);
+            intersections.add(new GeoPoint(this,P2));
             return intersections;
         }
         return null;

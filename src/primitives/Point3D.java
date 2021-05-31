@@ -1,4 +1,7 @@
 package primitives;
+
+import geometries.Intersectable.GeoPoint;
+
 /**
  * Class Point3D is the basic class representing a point in space 
  * @author Hila avraham
@@ -33,6 +36,13 @@ public class Point3D {
 		this.z = new Coordinate(p1.z.coord);
 	}
 	
+
+	public Point3D(GeoPoint geoPoint) {
+		Point3D p1=geoPoint.point;
+		this.x = new Coordinate(p1.x.coord);
+		this.y = new Coordinate(p1.y.coord);
+		this.z = new Coordinate(p1.z.coord);
+	}
 
 	/**
 	 * @return the x
