@@ -15,10 +15,10 @@ import scene.Scene;
  *
  */
 public class Render {
-    ImageWriter imageWriter = null;
-    Scene scene = null;
-    Camera camera = null;
-    RayTracerBase rayTracerBase = null;
+    ImageWriter imageWriter;
+    Scene scene ;
+    Camera camera ;
+    RayTracerBase rayTracerBase;
 
     public Render setImageWriter(ImageWriter _imageWriter) {
         imageWriter = _imageWriter;
@@ -42,32 +42,16 @@ public class Render {
 
 
     public void renderImage() {
-        try {
-            if (imageWriter == null) {
-                throw new MissingResourceException("missing resource", ImageWriter.class.getName(), "");
+        int nX = imageWriter.getNx();
+        int nY = imageWriter.getNy();
+        // loop on viewPlane pixels
+        for (int i = 0; i < nY; i++) {
+            for (int j = 0; j < nX; j++) {
+                //For each pixel will be built a ray and for each ray we will get a color from the horn comb. Does the color women in the appropriate pixel of the image maker
+                Ray ray = camera.constructRayThroughPixel(nX, nY, j, i);
+                Color color = rayTracerBase.traceRay(ray);
+                imageWriter.writePixel(j, i, color);
             }
-            if (scene == null) {
-                throw new MissingResourceException("missing resource", Scene.class.getName(), "");
-            }
-            if (camera == null) {
-                throw new MissingResourceException("missing resource", Camera.class.getName(), "");
-            }
-            if (rayTracerBase == null) {
-                throw new MissingResourceException("missing resource", RayTracerBase.class.getName(), "");
-            }
-
-            //rendering the image
-            int nX = imageWriter.getNx();
-            int nY = imageWriter.getNy();
-            for (int i = 0; i < nY; i++) {
-                for (int j = 0; j < nX; j++) {
-                    Ray ray =camera.constructRayThroughPixel(nX, nY, j, i);
-                    Color pixelColor = rayTracerBase.traceRay(ray);
-                    imageWriter.writePixel(j, i, pixelColor);
-                }
-            }
-        } catch (MissingResourceException e) {
-            throw new UnsupportedOperationException("Not implemented yet" + e.getClassName());
         }
     }
     
