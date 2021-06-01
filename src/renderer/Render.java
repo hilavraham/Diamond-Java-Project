@@ -40,6 +40,7 @@ public class Render {
         return this;
     }
 
+
     public void renderImage() {
         try {
             if (imageWriter == null) {
@@ -60,7 +61,7 @@ public class Render {
             int nY = imageWriter.getNy();
             for (int i = 0; i < nY; i++) {
                 for (int j = 0; j < nX; j++) {
-                    Ray ray = camera.constructRayThroughPixel(nX, nY, j, i);
+                    Ray ray =camera.constructRayThroughPixel(nX, nY, j, i);
                     Color pixelColor = rayTracerBase.traceRay(ray);
                     imageWriter.writePixel(j, i, pixelColor);
                 }
@@ -69,8 +70,7 @@ public class Render {
             throw new UnsupportedOperationException("Not implemented yet" + e.getClassName());
         }
     }
-
-
+    
     public void printGrid(int interval, Color color) {
         int nX = imageWriter.getNx();
         int nY = imageWriter.getNy();

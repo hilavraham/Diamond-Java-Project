@@ -49,8 +49,7 @@ public class RenderTests {
         render.writeToImage();
     }
 
-	// For stage 6 - please disregard in stage 5
-	/**
+    /**
 	 * Produce a scene with basic 3D model - including individual lights of the bodies 
 	 * and render it into a png image with a grid
 	 */
@@ -79,5 +78,4 @@ public class RenderTests {
 		render.printGrid(100, new Color(java.awt.Color.WHITE));
 		render.writeToImage();
 	}
-
 }

@@ -3,6 +3,8 @@ package primitives;
 import static primitives.Util.isZero;
 
 import java.util.List;
+
+import geometries.Intersectable.GeoPoint;
 /**
  * Class Ray Representation of a beam by point and direction vector
  * @author Hila avraham
@@ -35,6 +37,31 @@ public class Ray {
 		this.dir = _dir.normalized();
 	}
 	
+    /**
+     * find the closest Point to Ray origin
+     * @param pointsList intersections point List
+     * @return closest point
+     */
+	public GeoPoint findClosestGeoPoint (List<GeoPoint> pointsList) {
+		GeoPoint result =null;
+	        //The greatest distance (this will change)
+	        double closestDistance = Double.MAX_VALUE;
+
+	        if(pointsList== null){
+	            return null;
+	        }
+
+	        for (GeoPoint geoP: pointsList) {
+	            double temp = geoP.point.distance(p0);
+	            if(temp < closestDistance){
+	                closestDistance =temp;
+	                result =geoP;
+	            }
+	        }
+
+	        return  result;
+	    }
+
 
     /**
      * find the closest Point to Ray origin
