@@ -1,44 +1,69 @@
-/**
- * 
- */
 package scene;
 
 import elements.AmbientLight;
+import elements.LightSource;
 import geometries.Geometries;
 import primitives.Color;
 
+
+import java.util.LinkedList;
+import java.util.List;
+
 /**
- * @author hilaa
  *
  */
 public class Scene {
     private final String name;
+    public Geometries geometries;
 
-   
-    public Color background = Color.BLACK;
-    public AmbientLight ambientlight= new AmbientLight(new Color(192, 192, 192),1.d); ;
-    public Geometries geometries = null;
+    public AmbientLight ambientLight=new AmbientLight();
+    public Color backgroundColor =Color.BLACK;
+    public List<LightSource> lights = new LinkedList<>();
 
-    public Scene(String _name) {
-        name = _name;
-        geometries= new Geometries();
-     }
-
-    //chaining set methods (this NOT a builder pattern)
-
-    public Scene setBackground(Color background) {
-        this.background = background;
-        return  this;
+    /**
+     * A builder that gets the name of the scene (only) that will also build an empty collection of bodies for model D3.
+     * @param name ,the scene name
+     */
+    public Scene(String _name){
+        name=_name;
+        geometries=new Geometries();
     }
 
-    public Scene setAmbientLight(AmbientLight ambientlight) {
-        this.ambientlight = ambientlight;
+    /**
+     * set function for ambientLight
+     * @param ambientLight
+     * @return the scene
+     */
+    public Scene setAmbientLight(AmbientLight ambientLight) {
+        this.ambientLight=ambientLight;
         return this;
     }
 
+    /**
+     * set function for color
+     * @param color
+     * @return the scene
+     */
+    public Scene setBackground(Color color) {
+        this.backgroundColor =color;
+        return this;
+    }
+
+    /**
+     * set function for geometries
+     * @param geometries
+     * @return the scene
+     */
     public Scene setGeometries(Geometries geometries) {
         this.geometries = geometries;
         return  this;
     }
+
+	/**
+	 * @return the name
+	 */
+	public String getName() {
+		return name;
+	}
 
 }
