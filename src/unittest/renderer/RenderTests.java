@@ -6,7 +6,7 @@ import elements.*;
 import geometries.*;
 import primitives.*;
 import renderer.ImageWriter;
-import renderer.RayTracerBasic;
+import renderer.BasicRayTracer;
 import renderer.Render;
 import scene.Scene;
 
@@ -44,7 +44,7 @@ public class RenderTests {
         Render render = new Render() //
                 .setImageWriter(imageWriter) //
                 .setCamera(camera) //
-                .setRayTracer(new RayTracerBasic(scene));
+                .setRayTracer(new BasicRayTracer(scene));
 
         render.renderImage();
         render.printGrid(100, new Color(java.awt.Color.YELLOW));
@@ -75,7 +75,7 @@ public class RenderTests {
 		Render render = new Render() //
 				.setImageWriter(imageWriter) //
 				.setCamera(camera) //
-				.setRayTracer(new RayTracerBasic(scene));
+				.setRayTracer(new BasicRayTracer(scene));
 
 		render.renderImage();
 		render.printGrid(100, new Color(java.awt.Color.WHITE));
