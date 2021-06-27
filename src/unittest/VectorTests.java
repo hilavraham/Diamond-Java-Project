@@ -1,5 +1,5 @@
 package unittest;
-import static java.lang.System.out;
+//import static java.lang.System.out;
 import static org.junit.Assert.*;
 import static primitives.Util.isZero;
 

@@ -37,7 +37,14 @@ public class Ray {
 		this.dir = _dir.normalized();
 	}
 	
-    /**
+    public Ray(Point3D _point, Vector _lightDirection, Vector _n, double DELTA) {
+    	Vector delta = _n.scale(_n.dotProduct(_lightDirection) > 0 ? DELTA : - DELTA);
+		this.p0 =  _point.add(delta);
+		this.dir = _lightDirection.normalized();
+	
+	}
+
+	/**
      * find the closest Point to Ray origin
      * @param pointsList intersections point List
      * @return closest point

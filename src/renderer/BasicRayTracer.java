@@ -12,7 +12,7 @@ import scene.Scene;
 import java.util.List;
 
 public class BasicRayTracer extends RayTracerBase {
-    private static final double DELTA = 0.1;
+	private static final double DELTA = 0.1;
 
     /**
      * BasicRayTracer constructor
@@ -37,7 +37,9 @@ public class BasicRayTracer extends RayTracerBase {
         //The point closest to the beginning of the foundation will be found
         GeoPoint closestPoint = ray.findClosestGeoPoint(intersection);
         //the point color
-        return calcColor(closestPoint, ray);
+        return calcColor(closestPoint, ray)
+        		.add(scene.ambientLight.getIntensity())
+        		.add(closestPoint.geometry.getEmission());
     }
 
     /**
@@ -47,9 +49,7 @@ public class BasicRayTracer extends RayTracerBase {
      */
     private Color calcColor(GeoPoint closestPoint, Ray ray) {
 
-        return scene.ambientLight.getIntensity()
-                .add(closestPoint.geometry.getEmission())
-                .add(calcLocalEffects(closestPoint, ray));
+        return calcLocalEffects(closestPoint, ray);
     }
 
     /**
@@ -73,11 +73,11 @@ public class BasicRayTracer extends RayTracerBase {
             Vector l = lightSource.getL(intersection.point);
             double nl = alignZero(n.dotProduct(l));
             if (nl * nv > 0) { // sign(nl ) == sign(nv )
-                // if (unshaded(lightSource, intersection)) {
+                if (unshaded(lightSource,l, n,intersection)) {
                 Color lightIntensity = lightSource.getIntensity(intersection.point);
                 color = color.add(calcDiffusive(kd, l, n, lightIntensity),
                         calcSpecular(ks, l, n, v, nShininess, lightIntensity));
-                //}
+                }
             }
         }
         return color;
@@ -111,6 +111,21 @@ public class BasicRayTracer extends RayTracerBase {
     private Color calcDiffusive(double kd, Vector l, Vector n, Color lightIntensity) {
         return lightIntensity.scale(kd * Math.abs(l.dotProduct(n)));
     }
+    
+    private boolean unshaded(LightSource light, Vector l, Vector n, GeoPoint geopoint) {
+   	Vector lightDirection = l.scale(-1); // from point to light source
+   	Ray lightRay=new Ray(geopoint.point, lightDirection,n,DELTA);
+   	List<GeoPoint> intersections = scene.geometries.findGeoIntersections(lightRay);
+   	if (intersections == null) return true;
+   	double lightDistance = light.getDistance(geopoint.point);
+   	for (GeoPoint gp : intersections) {
+   	if (alignZero(gp.point.distance(geopoint.point)-lightDistance) <= 0)
+   	return false;
+   	}
+   	return true;
+ 
+    	}
+
 
 	/**
 	 * @return the delta

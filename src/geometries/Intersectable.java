@@ -8,7 +8,7 @@ import primitives.Point3D;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import jdk.dynalink.beans.StaticClass;
+//import jdk.dynalink.beans.StaticClass;
 
 /**
  * @author hilaa

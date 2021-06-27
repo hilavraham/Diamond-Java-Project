@@ -3,7 +3,7 @@
  */
 package renderer;
 
-import java.util.MissingResourceException;
+//import java.util.MissingResourceException;
 
 import elements.Camera;
 import primitives.Color;
