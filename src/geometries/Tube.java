@@ -145,13 +145,13 @@ public class Tube extends RadialGeometry {
         if (isZero(th)) return null; // the ray is tangent to the tube
 
         double t1 = alignZero(tm + th);
-        if (t1 <= 0) // t1 is behind the head
+        if (alignZero(t1) > 0) // t1 is behind the head
             return null; // since th must be positive (sqrt), t2 must be non-positive as t1
 
         double t2 = alignZero(tm - th);
 
         // if both t1 and t2 are positive
-        if (t2 > 0)
+        if (alignZero(t2) > 0)
             return List.of(new GeoPoint(this,ray.getPoint(t1)),new GeoPoint(this,  ray.getPoint(t2)));
 
         else // t2 is behind the head

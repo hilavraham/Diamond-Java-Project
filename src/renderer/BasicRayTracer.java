@@ -125,12 +125,12 @@ public class BasicRayTracer extends RayTracerBase {
    	return true;
  
     	}
+//    private boolean unshaded2(LightSource light, Vector l, Vector n, GeoPoint geopoint) {
+//    	Vector lightDirection = l.scale(-1); // from point to light source
+//      	Ray lightRay=new Ray(geopoint.point, lightDirection,n,DELTA);
+//    	List<GeoPoint> intersections = scene.geometries
+//    			.findGeoIntersections(lightRay, light.getDistance(lightRay.getP0()));
+//    	return intersections ==null;
+//    	}
 
-
-	/**
-	 * @return the delta
-	 */
-	public static double getDelta() {
-		return DELTA;
-	}
 }
