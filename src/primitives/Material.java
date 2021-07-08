@@ -10,9 +10,42 @@ public class Material {
     // for specular
     public double kS = 0; 
     // shininess
-    public int nShininess = 0; 
+    public int nShininess = 0;
+    //
+	public double kr=0;
+	public double kt=1; 
 
     /**
+	 * @return the kr
+	 */
+	public double getKr() {
+		return kr;
+	}
+
+	/**
+	 * @param kr the kr to set
+	 */
+	public Material setKr(double kr) {
+		this.kr = kr;
+        return this;
+	}
+
+	/**
+	 * @return the kt
+	 */
+	public double getKt() {
+		return kt;
+	}
+
+	/**
+	 * @param kt the kt to set
+	 */
+	public Material setKt(double kt) {
+		this.kt = kt;
+		 return this;
+	}
+
+	/**
      * set function for kD
      * @param kD for diffuse
      * @return the object
