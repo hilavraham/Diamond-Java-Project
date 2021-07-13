@@ -103,4 +103,20 @@ public class Plane extends Geometry {
 		        return intersections;
 		    }
 
+		@Override
+		 public List<GeoPoint> findGeoIntersections(Ray ray,double maxDistance) {
+	        if (p0.equals(ray.getP0()))//if the start of the ray equals to the plane point there is no intersections
+	            return null;
+	        Vector V=p0.subtract(ray.getP0());
+	        double denominator=alignZero(normal.dotProduct(ray.getDir()));
+	        if (denominator==0)//the ray is parallel to the plane
+	            return null;
+	        double t=alignZero(normal.dotProduct(V)/denominator);
+	        if (t>0 && alignZero (t-maxDistance ) <= 0 )
+	            return List.of(new GeoPoint(this,ray.getPoint(t)));
+
+	        return null;
+	    }
+		
+
 	}

@@ -12,6 +12,33 @@ public class Vector {
 			return head;
 		}
 
+	    /**
+	     * get methode
+	     * @return
+	     */
+	    public double getX() {
+
+	        return head.getX().coord;
+	    }
+
+	    /**
+	     * get methode
+	     * @return
+	     */
+	    public double getY() {
+
+	        return head.getY().coord;
+	    }
+
+	    /**
+	     * get methode
+	     * @return
+	     */
+	    public double getZ() {
+
+	        return head.getZ().coord;
+	    }
+
 		  /**
 	     * primary constructor for vector
 	     * @param _head value for head 

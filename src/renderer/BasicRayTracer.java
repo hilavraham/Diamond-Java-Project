@@ -13,8 +13,11 @@ import java.util.List;
 
 public class BasicRayTracer extends RayTracerBase {
 	private static final double DELTA = 0.1;
-	  /**
-     * initialize the field scene
+
+
+
+    /**
+     * BasicRayTracer constructor
      * @param scene
      */
     public BasicRayTracer(Scene scene) {
@@ -22,10 +25,11 @@ public class BasicRayTracer extends RayTracerBase {
     }
 
     /**
-     * this methode get ray, and calculate the color of the closest intersection
+     * Look for cuts between the ray and the 3D model of the scene
      * @param ray
-     * @return the colour of the closest point
+     * @return
      */
+    @Override
     public  Color traceRay(Ray ray) {
         GeoPoint closestPoint = findClosestIntersection(ray);
         if (closestPoint == null) return scene.backgroundColor;
@@ -33,14 +37,16 @@ public class BasicRayTracer extends RayTracerBase {
     }
 
     /**
-     * calculate the ambientLight of the point
-     * @param geoPoint
-     * @return the color of the point
+     * Returns the fill / ambient lighting color of the scene
+     * @param closestPoint point
+     * @return color
      */
     protected Color calcColor(GeoPoint geoPoint, Ray ray) {
         return calcColor(geoPoint, ray, MAX_CALC_COLOR_LEVEL, INITIAL_K)
                 .add(scene.ambientLight.getIntensity());
     }
+
+
     /**
      * calculate the color of the point according to local and global effects
      *
@@ -57,13 +63,11 @@ public class BasicRayTracer extends RayTracerBase {
 
     }
 
-    /**
-     * calculate the color of point according to diffusion, specular and shininess
-     *
-     * @param geoPoint
+
+	/**
+     * @param intersection
      * @param ray
-     * @param k
-     * @return
+     * @return color of the point
      */
     protected Color calcLocalEffects(GeoPoint geoPoint, Ray ray, double k) {
         Vector v = ray.getDir();
@@ -80,7 +84,8 @@ public class BasicRayTracer extends RayTracerBase {
             double nl = alignZero(n.dotProduct(l));
             if (nl * nv > 0) { // sign(nl) == sing(nv) the lightSources is affected on the point
                 double ktr = transparency(lightSource, l, n, geoPoint);
-                if (ktr * k > MIN_CALC_COLOR_K) { //If the effect of the light is negligible then do not add it
+                if (ktr * k > MIN_CALC_COLOR_K) {
+                	//If the effect of the light is negligible then do not add it
                     Color lightIntensity = lightSource.getIntensity(geoPoint.point).scale(ktr);
                     //add the diffusion and specular and shininess.
                     color = color.add(calcDiffusive(kd, l, n, lightIntensity),
@@ -90,6 +95,23 @@ public class BasicRayTracer extends RayTracerBase {
         }
         return color;
     }
+
+
+    
+//    private boolean unshaded(LightSource light, Vector l, Vector n, GeoPoint geopoint) {
+//   	Vector lightDirection = l.scale(-1); // from point to light source
+//   	Ray lightRay=new Ray(geopoint.point, lightDirection,n,DELTA);
+//   	List<GeoPoint> intersections = scene.geometries.findGeoIntersections(lightRay);
+//   	if (intersections == null) return true;
+//   	double lightDistance = light.getDistance(geopoint.point);
+//   	for (GeoPoint gp : intersections) {
+//   	if (alignZero(gp.point.distance(geopoint.point)-lightDistance) <= 0)
+//   	return false;
+//   	}
+//   	return true;
+// 
+//    	}
+
     /**
      * calculate the intensity of lightSource on point
      *
@@ -104,7 +126,7 @@ public class BasicRayTracer extends RayTracerBase {
         Vector lightDirection = l.scale(-1).normalize();
         Ray lightRay = new Ray(point, lightDirection, n,DELTA);//ray from the point to the ray and moved by delta
         double lightDistance = lightSource.getDistance(point);
-        List<GeoPoint> intersections = scene.geometries.findGeoIntersections(lightRay);
+        List<GeoPoint> intersections = scene.geometries.findGeoIntersections(lightRay, lightDistance);
         if (intersections == null) {//if there is no geometries between the point and the light, the transparency is 1
             return 1d;
         }

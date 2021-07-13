@@ -110,9 +110,9 @@ public class Tube extends RadialGeometry {
             deltaP = p0.subtract(axysRay.getP0());
         } catch (IllegalArgumentException e1) { // the ray begins at axis P0
             if (vVa == 0) // the ray is orthogonal to Axis
-                return List.of(new GeoPoint(this,ray.getPoint(_radius)));
+                return List.of(new GeoPoint(this,ray.getPoint(radius)));
   
-            double t = alignZero(Math.sqrt(_radius * _radius / vMinusVVaVa.lengthSquared()));
+            double t = alignZero(Math.sqrt(radius * radius / vMinusVVaVa.lengthSquared()));
             return t == 0 ? null : List.of(new GeoPoint(this,ray.getPoint(t)));
         }
 
@@ -126,14 +126,14 @@ public class Tube extends RadialGeometry {
             try {
                 dPMinusdPVaVa = deltaP.subtract(dPVaVa);
             } catch (IllegalArgumentException e1) {
-                double t = alignZero(Math.sqrt(_radius * _radius / a));
+                double t = alignZero(Math.sqrt(radius * radius / a));
                 return t == 0 ? null : List.of(new GeoPoint(this,ray.getPoint(t)));
             }
         }
 
         // B = 2(v - (v*va)*va) * (dp - (dp*va)*va))
         b = 2 * alignZero(vMinusVVaVa.dotProduct(dPMinusdPVaVa));
-        c = dPMinusdPVaVa.lengthSquared() - _radius * _radius;
+        c = dPMinusdPVaVa.lengthSquared() - radius * radius;
 
         // A*t^2 + B*t + C = 0 - lets resolve it
         double discr = alignZero(b * b - 4 * a * c);
@@ -158,5 +158,11 @@ public class Tube extends RadialGeometry {
             return List.of(new GeoPoint(this,ray.getPoint(t1)));
 
 //        return null;
+	}
+
+	@Override
+	public List<GeoPoint> findGeoIntersections(Ray ray, double maxDistance) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

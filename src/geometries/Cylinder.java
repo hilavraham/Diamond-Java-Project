@@ -8,7 +8,7 @@ import static primitives.Util.alignZero;
 import static primitives.Util.isZero;
 
 import java.util.ArrayList;
-import java.util.List;
+
 /**
  *Cylinder class represents Cylinder in 3D Cartesian coordinate system
  * by height and two Plane
@@ -60,9 +60,5 @@ public String toString() {
         return p.subtract(o).normalize();
     }
 
-    @Override
-	public ArrayList<Point3D> findIntersections(Ray ray) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+ 
 }

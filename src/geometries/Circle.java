@@ -53,10 +53,16 @@ public class Circle extends RadialGeometry  {
         if (intersections == null)
         	return null;
 
-        double pToEdge = alignZero(_radius - _center.distance(new Point3D(	intersections.get(0))));
+        double pToEdge = alignZero(radius - _center.distance(new Point3D(	intersections.get(0))));
 
         if (pToEdge <=0 ) 
         	return null;
         return intersections;
+	}
+
+	@Override
+	public List<GeoPoint> findGeoIntersections(Ray ray, double maxDistance) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

@@ -50,22 +50,33 @@ public interface Intersectable {
     }
 
     /**
-     *
+     * return list of Intersections with one or more geometries
      * @param ray
-     * @return list of geoPoints
+     * @return
      */
     default List<Point3D> findIntersections(Ray ray) {
         List<GeoPoint> geoList = findGeoIntersections(ray);
         return geoList == null ? null
-                : geoList.stream()
+                : geoList .stream()
                 .map(gp -> gp.point)
                 .collect(Collectors.toList());
     }
-    List<GeoPoint> findGeoIntersections(Ray ray);
 
-//    default List<GeoPoint> findGeoIntersections(Ray ray){
-//    	return findGeoIntersections(ray, Double.POSITIVE_INFINITY);
-//    }
-//    
-//    //List<GeoPoint> findGeoIntersections(Ray ray,double maxDistance);
+    /**
+     * return list of GeoIntersections with one or more geometries
+     * @param ray
+     * @return
+     */
+   default List<GeoPoint> findGeoIntersections(Ray ray){
+       return findGeoIntersections(ray,Double.POSITIVE_INFINITY);
+   }
+
+    /**
+     * return list of GeoIntersections with one or more geometries
+     * and  distance from the start of the ray is less than maxDistance
+     * @param ray
+     * @param maxDistance
+     * @return
+     */
+    List<GeoPoint> findGeoIntersections(Ray ray,double maxDistance);
 }
