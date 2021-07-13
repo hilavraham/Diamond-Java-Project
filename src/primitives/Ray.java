@@ -44,6 +44,7 @@ public class Ray {
 	
 	}
 
+
 	/**
      * find the closest Point to Ray origin
      * @param pointsList intersections point List

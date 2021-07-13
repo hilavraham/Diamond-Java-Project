@@ -11,8 +11,9 @@ public class Material {
     public double kS = 0; 
     // shininess
     public int nShininess = 0;
-    //
+    //for Reflection
 	public double kr=0;
+	//for  Refraction (Transparency)
 	public double kt=1; 
 
     /**
