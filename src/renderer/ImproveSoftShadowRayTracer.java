@@ -72,7 +72,7 @@ public class ImproveSoftShadowRayTracer extends BasicRayTracer {
      */
    // @Override
     protected double transparency1(LightSource lightSource, Vector lightDirection, Vector n, GeoPoint geoPoint) {
-        //if lightSource is DirectionalLight' there is no soft shadow
+        //if lightSource is DirectionalLight'- there is no soft shadow
         if (lightSource.getClass() == DirectionalLight.class) {
             return super.transparency(lightSource, lightDirection, n, geoPoint);
         }
